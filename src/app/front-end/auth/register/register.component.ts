@@ -1,45 +1,68 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-
-interface Commune {
-  id: number;
-  nom: string;
-}
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    FormsModule
-  ],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  currentYear = new Date().getFullYear();
-  phoneNumber = '';
+  currentStep = 1;
+  showPassword = false;
+  showConfirm = false;
 
-  // Sélection de la commune
-  selectedCommune: number | null = null;
+  form = {
+    nom: '',
+    prenom: '',
+    telephone: '',
+    email: '',
+    commune: '',
+    quartier: '',
+    password: '',
+    confirm: '',
+    acceptConditions: false
+  };
 
-  // Saisie libre du quartier
-  quartier: string = '';
+  constructor(private router: Router) {}
 
-  // Liste des communes
-  communes: Commune[] = [
-    { id: 1, nom: 'Yopougon' },
-    { id: 2, nom: 'Port-Bouet' },
-    { id: 3, nom: 'Adjame' },
-    { id: 4, nom: 'Marcory' },
-    { id: 5, nom: 'Bingerville' },
-    { id: 6, nom: 'Koumassi' },
-    { id: 7, nom: 'Treichville' },
-    { id: 8, nom: 'Songon' },
-    { id: 8, nom: 'Cocody' }
+  nextStep() {
+    if (this.currentStep === 1) {
+      if (!this.form.nom || !this.form.prenom) {
+        alert('Veuillez remplir le nom et le prénom');
+        return;
+      }
+    }
+    if (this.currentStep === 2) {
+      if (!this.form.telephone || !this.form.email) {
+        alert('Veuillez remplir le téléphone et l\'email');
+        return;
+      }
+    }
+    if (this.currentStep < 3) this.currentStep++;
+  }
 
-  ];
+  prevStep() {
+    if (this.currentStep > 1) this.currentStep--;
+  }
+
+  onSubmit() {
+    if (!this.form.password || !this.form.confirm) {
+      alert('Veuillez remplir les mots de passe');
+      return;
+    }
+    if (this.form.password !== this.form.confirm) {
+      alert('Les mots de passe ne correspondent pas');
+      return;
+    }
+    if (!this.form.acceptConditions) {
+      alert('Veuillez accepter les conditions générales');
+      return;
+    }
+    console.log('✅ Inscription réussie', this.form);
+    this.router.navigate(['/auth/login']);
+  }
 }

@@ -1,136 +1,181 @@
-<!-- Sign in Start -->
-<section class="sign-in-page bg-white">
-  <div class="container-fluid p-0">
-    <div class="row no-gutters">
-      <div class="col-sm-6 align-self-center">
-        <div class="sign-in-from">
-          <h1 class="mb-0">NOUVEL UTILISATEUR</h1>
-          <p>Veuillez remplir le formulaire pour pouvoir vous inscrire</p>
-          <form class="mt-4">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Nom</label>
-                  <input type="text" class="form-control" placeholder="Veuillez entrer votre nom">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Prénom</label>
-                  <input type="text" class="form-control" placeholder="Veuillez entrer votre prénom">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Numéro de téléphone</label>
-                  <input type="tel"
-                         class="form-control"
-                         [(ngModel)]="phoneNumber"
-                         name="phone"
-                         placeholder="Entrez votre numéro de téléphone">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Commune</label>
-                  <select class="form-control"
-                          [(ngModel)]="selectedCommune"
-                          name="commune">
-                    <option value="" disabled selected>Sélectionner votre commune</option>
-                    <option *ngFor="let commune of communes" [value]="commune.id">
-                      {{ commune.nom }}
-                    </option>
-                  </select>
-                </div>
-              </div>
+<section class="register-page">
+  <div class="overlay d-flex justify-content-center align-items-center">
+    <div class="register-card">
 
-              <!-- Quartier - Champ de saisie libre -->
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Quartier</label>
-                  <input type="text"
-                         class="form-control"
-                         [(ngModel)]="quartier"
-                         name="quartier"
-                         placeholder="Veuillez entrer votre quartier">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Email</label>
-                  <input type="email" class="form-control" placeholder="Veuillez entrer votre email">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Mot de passe</label>
-                  <input type="password" class="form-control" placeholder="Entrez votre mot de passe">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Confirmez votre mot de passe</label>
-                  <input type="password" class="form-control" placeholder="Veuillez confirmer votre mot de passe">
-                </div>
-              </div>
-            </div>
-            <div class="d-inline-block w-100 mt-3">
-              <div class="custom-control custom-checkbox d-inline-block mt-2 pt-1">
-                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                <label class="custom-control-label" for="customCheck1">
-                  J'accepte les <a href="#">conditions générales</a>
-                </label>
-              </div>
-              <button type="submit" class="btn btn-primary float-right">
-                S'enregistrer
-                <span class="btn-icon">→</span>
-              </button>
-            </div>
+      <!-- LOGO -->
+      <div class="text-center mb-4">
+        <img src="assets/images/logo-ea-login.png" alt="Logo" class="register-logo" />
+      </div>
 
-            <div class="sign-info mt-3">
-              <span class="dark-color d-inline-block line-height-2">
-                Vous avez déjà un compte ?
-                <a [routerLink]="'/auth/login'">Se connecter</a>
-              </span>
-              <div class="text-lg-center mt-4">
-                <p class="text-muted small">© {{ currentYear }} Structure Academie Elite</p>
-              </div>
-              <ul class="iq-social-media">
-                <div class="social-links d-flex justify-content-center gap-3 mt-4">
-                  <a href="https://www.facebook.com/share/1DaUDE43Mp/?mibextid=wwXIfr"
-                     target="_blank"
-                     rel="noopener noreferrer"
-                     class="social-btn">
-                    <i class="bi bi-facebook"></i>
-                  </a>
-                  <a href="https://twitter.com/votrecompte"
-                     target="_blank"
-                     rel="noopener noreferrer"
-                     class="social-btn">
-                    <i class="bi bi-twitter-x"></i>
-                  </a>
-
-                  <a href="https://instagram.com/votrecompte"
-                     target="_blank"
-                     rel="noopener noreferrer"
-                     class="social-btn">
-                    <i class="bi bi-instagram"></i>
-                  </a>
-                </div>
-              </ul>
-            </div>
-
-          </form>
+      <!-- STEPPER HEADER -->
+      <div class="stepper-header mb-4">
+        <div class="step" [class.active]="currentStep >= 1" [class.done]="currentStep > 1">
+          <div class="step-circle">
+            <i *ngIf="currentStep > 1" class="bi bi-check-lg"></i>
+            <span *ngIf="currentStep <= 1">1</span>
+          </div>
+          <div class="step-label">Identité</div>
+        </div>
+        <div class="step-line" [class.done]="currentStep > 1"></div>
+        <div class="step" [class.active]="currentStep >= 2" [class.done]="currentStep > 2">
+          <div class="step-circle">
+            <i *ngIf="currentStep > 2" class="bi bi-check-lg"></i>
+            <span *ngIf="currentStep <= 2">2</span>
+          </div>
+          <div class="step-label">Coordonnées</div>
+        </div>
+        <div class="step-line" [class.done]="currentStep > 2"></div>
+        <div class="step" [class.active]="currentStep >= 3">
+          <div class="step-circle">3</div>
+          <div class="step-label">Sécurité</div>
         </div>
       </div>
-      <div class="col-sm-6 text-center">
-        <div class="sign-in-detail text-white"
-             style="background: url(/assets/images/image_appli/imageappli.jpg) no-repeat 0 0; background-size: cover;">
+
+      <!-- ÉTAPE 1 : Identité -->
+      <div *ngIf="currentStep === 1" class="step-content animate-step">
+        <h5 class="step-title">Votre identité</h5>
+        <p class="step-subtitle">Comment vous appelez-vous ?</p>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Nom <span class="text-danger">*</span></label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-person"></i></span>
+              <input type="text" class="form-control" placeholder="Votre nom"
+                     [(ngModel)]="form.nom" name="nom" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Prénom <span class="text-danger">*</span></label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-person"></i></span>
+              <input type="text" class="form-control" placeholder="Votre prénom"
+                     [(ngModel)]="form.prenom" name="prenom" />
+            </div>
+          </div>
         </div>
+
+        <div class="d-flex justify-content-end mt-4">
+          <button class="btn btn-next" (click)="nextStep()">
+            Suivant <i class="bi bi-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- ÉTAPE 2 : Coordonnées -->
+      <div *ngIf="currentStep === 2" class="step-content animate-step">
+        <h5 class="step-title">Vos coordonnées</h5>
+        <p class="step-subtitle">Comment vous contacter ?</p>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Téléphone <span class="text-danger">*</span></label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+              <input type="tel" class="form-control" placeholder="Votre numéro"
+                     [(ngModel)]="form.telephone" name="telephone" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Email <span class="text-danger">*</span></label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+              <input type="email" class="form-control" placeholder="Votre email"
+                     [(ngModel)]="form.email" name="email" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Commune</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-geo-alt"></i></span>
+              <input type="text" class="form-control" placeholder="Votre commune"
+                     [(ngModel)]="form.commune" name="commune" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Quartier</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-map"></i></span>
+              <input type="text" class="form-control" placeholder="Votre quartier"
+                     [(ngModel)]="form.quartier" name="quartier" />
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+          <button class="btn btn-back" (click)="prevStep()">
+            <i class="bi bi-arrow-left"></i> Retour
+          </button>
+          <button class="btn btn-next" (click)="nextStep()">
+            Suivant <i class="bi bi-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- ÉTAPE 3 : Sécurité -->
+      <div *ngIf="currentStep === 3" class="step-content animate-step">
+        <h5 class="step-title">Sécurité</h5>
+        <p class="step-subtitle">Choisissez un mot de passe sécurisé</p>
+
+        <div class="row g-3">
+          <div class="col-12">
+            <label class="form-label">Mot de passe <span class="text-danger">*</span></label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-lock"></i></span>
+              <input [type]="showPassword ? 'text' : 'password'" class="form-control"
+                     placeholder="Votre mot de passe"
+                     [(ngModel)]="form.password" name="password"
+                     autocomplete="new-password" />
+              <span class="input-group-text" style="cursor:pointer" (click)="showPassword = !showPassword">
+                <i [class]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+              </span>
+            </div>
+          </div>
+          <div class="col-12">
+            <label class="form-label">Confirmer le mot de passe <span class="text-danger">*</span></label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+              <input [type]="showConfirm ? 'text' : 'password'" class="form-control"
+                     placeholder="Confirmez votre mot de passe"
+                     [(ngModel)]="form.confirm" name="confirm"
+                     autocomplete="new-password" />
+              <span class="input-group-text" style="cursor:pointer" (click)="showConfirm = !showConfirm">
+                <i [class]="showConfirm ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+              </span>
+            </div>
+          </div>
+
+          <!-- CONDITIONS -->
+          <div class="col-12 mt-2">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox"
+                     [(ngModel)]="form.acceptConditions" name="conditions" id="conditions" />
+              <label class="form-check-label" for="conditions">
+                J'accepte les <a href="#" class="text-success">conditions générales</a>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+          <button class="btn btn-back" (click)="prevStep()">
+            <i class="bi bi-arrow-left"></i> Retour
+          </button>
+          <button class="btn btn-submit" (click)="onSubmit()">
+            <i class="bi bi-check-circle"></i> S'enregistrer
+          </button>
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="text-center mt-4">
+        <span class="text-muted small">Vous avez déjà un compte ? </span>
+        <a routerLink="/auth/login" class="text-success fw-bold">Se connecter</a>
+      </div>
+      <div class="text-center mt-2">
+        <p class="text-muted small">© 2026 Structure Academie Elite</p>
       </div>
 
     </div>
   </div>
 </section>
-
-
