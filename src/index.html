@@ -6,8 +6,46 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="assets/css/typography.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <link rel="stylesheet" href="assets/fonts/remixicon.css">
 </head>
-<body>
-  <app-root></app-root>
+<body class="top-tab-horizontal">
+
+<div id="loading">
+  <div id="loading-center">
+    <div class="loader">
+      <div class="cube">
+        <div class="sides">
+          <div class="top"></div>
+          <div class="right"></div>
+          <div class="bottom"></div>
+          <div class="left"></div>
+          <div class="front"></div>
+          <div class="back"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<app-root></app-root>
+
+
+
+<script>
+  window.addEventListener('load', function () {
+    const loader = document.getElementById('loading');
+    if (loader) {
+      loader.style.transition = 'opacity 0.5s ease';
+      loader.style.opacity = '0';
+      setTimeout(() => loader.style.display = 'none', 1000);
+    }
+  });
+</script>
+
 </body>
 </html>
+

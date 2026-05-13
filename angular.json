@@ -2,13 +2,18 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "analytics": "1796713a-400c-44dd-85c3-02d5613387d6"
   },
   "newProjectRoot": "projects",
   "projects": {
-    "elite-academie3": {
+    "elite_academie_app": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "css"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -18,15 +23,24 @@
           "options": {
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "css",
             "assets": [
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets"
               }
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "src/styles.css"
-            ]
+            ],
+            "outputMode": "static"
           },
           "configurations": {
             "production": {
@@ -56,10 +70,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "elite-academie3:build:production"
+              "buildTarget": "elite_academie_app:build:production"
             },
             "development": {
-              "buildTarget": "elite-academie3:build:development"
+              "buildTarget": "elite_academie_app:build:development"
             }
           },
           "defaultConfiguration": "development"

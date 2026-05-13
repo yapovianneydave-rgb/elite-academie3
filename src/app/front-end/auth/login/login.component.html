@@ -1,0 +1,75 @@
+<section class="sign-in-page">
+  <div class="overlay d-flex justify-content-center align-items-center">
+    <div class="sign-in-from">
+
+      <!-- LOGO -->
+      <div class="logo-container text-center mb-3">
+        <img src="assets/images/logo-ea-login.png" alt="Logo Elite Académie" class="login-logo" />
+      </div>
+
+      <!-- MESSAGE -->
+      <p class="login-message text-center">
+        Entrez votre identifiant et votre mot de passe pour accéder à votre application.
+      </p>
+
+      <!-- NOM UTILISATEUR / DIVIDER -->
+      <div class="divider-name d-flex align-items-center my-3">
+        <hr class="flex-grow-1">
+        <span class="mx-3 fw-bold">ELITE ACADÉMIE</span>
+        <hr class="flex-grow-1">
+      </div>
+
+      <!-- FORMULAIRE -->
+      <form (ngSubmit)="onLogin()">
+
+        <!-- Identifiant -->
+        <div class="input-group mb-3 custom-input-group">
+          <input
+            type="text"
+            class="form-control custom-field"
+            placeholder="Matricule"
+            [(ngModel)]="identifiant"
+            name="identifiant"
+            autocomplete="username"
+          />
+          <span class="input-group-text custom-icon">
+            <i class="bi bi-envelope-fill text-success"></i>
+          </span>
+        </div>
+
+        <!-- Mot de passe -->
+        <div class="input-group mb-4 custom-input-group">
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            class="form-control custom-field"
+            placeholder="Mot de passe"
+            [(ngModel)]="password"
+            name="password"
+            autocomplete="current-password"
+          />
+          <span class="input-group-text custom-icon" (click)="togglePassword()" style="cursor:pointer">
+            <i [class]="showPassword ? 'bi bi-unlock-fill text-success' : 'bi bi-lock-fill text-success'"></i>
+          </span>
+        </div>
+
+        <!-- Bouton -->
+        <div class="text-center">
+          <button type="submit" class="btn btn-login">
+            Connexion
+          </button>
+        </div>
+
+        <div class="text-center mt-3">
+          <span>Vous n'avez pas de compte ?</span>
+          <a routerLink="/auth/register">Inscrivez-vous</a>
+        </div>
+
+      </form>
+
+      <div class="text-center mt-4">
+        <p class="text-muted small">© 2026 Structure Elite Académie</p>
+      </div>
+
+    </div>
+  </div>
+</section>

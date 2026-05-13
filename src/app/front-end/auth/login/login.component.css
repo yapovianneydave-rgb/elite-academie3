@@ -1,0 +1,98 @@
+.sign-in-page {
+  min-height: 100vh;
+  background-image: url('../../../../assets/images/imageappli.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay {
+  width: 100%;
+  min-height: 100vh;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign-in-from {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 40px 35px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* LOGO */
+.login-logo {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;        /* ← change contain en cover */
+  border-radius: 50%;
+  border: 3px solid #28a745;
+  padding: 0;               /* ← supprimez le padding */
+}
+
+/* MESSAGE EN ROUGE */
+.login-message {
+  color: #e74c3c;
+  font-size: 0.88rem;
+  margin-bottom: 0;
+}
+
+/* DIVIDER AVEC NOM */
+.divider-name hr {
+  border-color: #e67e22;
+  border-width: 2px;
+  opacity: 1;
+}
+
+.divider-name span {
+  font-size: 0.95rem;
+  color: #333;
+  white-space: nowrap;
+}
+
+/* CHAMPS */
+.custom-input-group .form-control.custom-field {
+  border-right: none;
+  border-radius: 25px 0 0 25px;
+  background: #f8f9fa;
+  border-color: #dee2e6;
+  padding: 12px 18px;
+  font-size: 0.95rem;
+}
+
+.custom-input-group .form-control.custom-field:focus {
+  box-shadow: none;
+  border-color: #28a745;
+}
+
+.custom-input-group .input-group-text.custom-icon {
+  border-left: none;
+  border-radius: 0 25px 25px 0;
+  background: #f8f9fa;
+  border-color: #dee2e6;
+  padding: 12px 16px;
+}
+
+/* BOUTON */
+.btn-login {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.btn-login:hover {
+  background-color: #218838;
+  color: white;
+}
