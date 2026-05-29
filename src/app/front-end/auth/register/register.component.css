@@ -147,6 +147,111 @@
   border: none;
 }
 
+/* ============================================
+   SÉLECTEUR DE RÔLE - BOUTONS RADIO VISUELS
+   ============================================ */
+
+.role-selector {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.role-card {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #fff;
+}
+
+.role-card:hover {
+  border-color: #198754;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.role-card.selected {
+  border-color: #198754;
+  background: #f0fff4;
+  box-shadow: 0 4px 16px rgba(25, 135, 84, 0.15);
+}
+
+/* Cacher le vrai input radio */
+.role-card input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.role-icon {
+  font-size: 2.5rem;
+  color: #6c757d;
+  margin-bottom: 0.75rem;
+  transition: color 0.3s ease;
+}
+
+.role-card.selected .role-icon {
+  color: #198754;
+}
+
+.role-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 0.25rem;
+}
+
+.role-desc {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.role-check {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 1.3rem;
+  color: #198754;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.3s ease;
+}
+
+.role-card.selected .role-check {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .role-selector {
+    flex-direction: column;
+  }
+
+  .role-card {
+    flex-direction: row;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .role-icon {
+    font-size: 2rem;
+    margin-bottom: 0;
+  }
+
+  .role-info {
+    text-align: left;
+  }
+}
+
 .btn-submit:hover { background: #218838; color: white; }
 
 /* ANIMATION */

@@ -18,6 +18,7 @@ export class RegisterComponent {
   form = {
     nom: '',
     prenom: '',
+    role: '',
     telephone: '',
     email: '',
     commune: '',
@@ -27,12 +28,13 @@ export class RegisterComponent {
     acceptConditions: false
   };
 
+
   constructor(private router: Router) {}
 
   nextStep() {
     if (this.currentStep === 1) {
-      if (!this.form.nom || !this.form.prenom) {
-        alert('Veuillez remplir le nom et le prénom');
+      if (!this.form.nom || !this.form.prenom || !this.form.role) {
+        alert('Veuillez remplir le nom, le prénom et sélectionner votre rôle');
         return;
       }
     }

@@ -34,7 +34,7 @@
       <!-- ÉTAPE 1 : Identité -->
       <div *ngIf="currentStep === 1" class="step-content animate-step">
         <h5 class="step-title">Votre identité</h5>
-        <p class="step-subtitle">Comment vous appelez-vous ?</p>
+        <p class="step-subtitle">Qui êtes-vous ?</p>
 
         <div class="row g-3">
           <div class="col-md-6">
@@ -51,6 +51,34 @@
               <span class="input-group-text"><i class="bi bi-person"></i></span>
               <input type="text" class="form-control" placeholder="Votre prénom"
                      [(ngModel)]="form.prenom" name="prenom" />
+            </div>
+          </div>
+
+          <!-- CHAMP RÔLE - BOUTONS RADIO VISUELS -->
+          <div class="col-12">
+            <label class="form-label">Vous êtes <span class="text-danger">*</span></label>
+            <div class="role-selector">
+              <label class="role-card" [class.selected]="form.role === 'repetiteur'">
+                <input type="radio" [(ngModel)]="form.role" name="role" value="repetiteur" />
+                <div class="role-icon">
+                  <i class="bi bi-easel"></i>
+                </div>
+                <div class="role-title">Répétiteur</div>
+                <div class="role-check">
+                  <i class="bi bi-check-circle-fill"></i>
+                </div>
+              </label>
+
+              <label class="role-card" [class.selected]="form.role === 'parent'">
+                <input type="radio" [(ngModel)]="form.role" name="role" value="parent" />
+                <div class="role-icon">
+                  <i class="bi bi-people"></i>
+                </div>
+                <div class="role-title">Parent</div>
+                <div class="role-check">
+                  <i class="bi bi-check-circle-fill"></i>
+                </div>
+              </label>
             </div>
           </div>
         </div>
